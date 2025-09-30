@@ -58,9 +58,9 @@ Linkowanie z kodem C
 ```bash
 gcc -o program main.c ninv.o
 ```
-```c
-### Przykład Użycia
 
+### Przykład Użycia
+```c
 #include <stdint.h>
 #include <stdio.h>
 
