@@ -29,7 +29,7 @@ The implementation uses a sophisticated bit-by-bit long division algorithm:
 - Automatic precision normalization.
 
 ## 🔧 Usage
-
+```c
 // Function signature
 void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 
@@ -37,7 +37,7 @@ void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 // result - Output array for the quotient
 // divisor - Input array containing the divisor
 // n - Number of bits (power of 2 in the dividend: 2^n
-
+```
 ## 📈 Performance Characteristics
 
 - **Time Complexity**: O(n × w) where n is the bit count and w is the word count.
@@ -52,16 +52,16 @@ void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 - GCC or a compatible C compiler (for linking)
 
 ### Compilation
-
+```bash
 #Compile the assembly file
 nasm -f elf64 ninv.asm -o ninv.o
 
 #Link with C code
 gcc -o program main.c ninv.o
-
+```
 
 ### Example Usage
-
+```c
 #include <stdint.h>
 #include <stdio.h>
 
@@ -78,9 +78,9 @@ ninv(result, divisor, n);
 printf("Result: %lu\n", result);
 return 0;
 }
-
+```
 ## 📁 Project Structure
-
+```
 ninv-assembly-x86-64/
 ├── ninv.asm # Main assembly implementation
 ├── main.c # Example usage
@@ -88,7 +88,7 @@ ninv-assembly-x86-64/
 ├── README.md # This file
 └── tests/ # Unit tests
 └── test_ninv.c
-
+```
 
 ## 📚 Documentation
 
