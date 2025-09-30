@@ -77,7 +77,7 @@ return 0;
 }
 
 ## 📁 Struktura Projektu
-
+'''
 ninv-assembly-x86-64/
 ├── ninv.asm # Główna implementacja w assembly
 ├── main.c # Przykład użycia
@@ -85,7 +85,7 @@ ninv-assembly-x86-64/
 ├── README.md # Ten plik
 └── tests/ # Testy jednostkowe
 └── test_ninv.c
-
+'''
 ## 📚 Dokumentacja
 
 Kod zawiera szczegółowe komentarze w języku angielskim wyjaśniające:
