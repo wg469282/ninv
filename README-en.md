@@ -36,24 +36,7 @@ void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 // Parameters:
 // result - Output array for the quotient
 // divisor - Input array containing the divisor
-// n - Number of bits (power of 2 in the dividend: 2^n)
-
-## 💡 Use Cases
-
-- Cryptographic operations requiring modular arithmetic.
-- High-precision mathematical computations.
-- Performance-critical numerical algorithms.
-- Educational material for learning assembly programming.
-- Implementations of big integer libraries.
-
-## 🎓 Educational Value
-
-This project showcases:
-- **Low-Level Programming**: Direct hardware manipulation and register optimization.
-- **Algorithm Implementation**: Translating mathematical concepts into assembly.
-- **Memory Management**: Manual stack allocation and cleanup procedures.
-- **Performance Optimization**: Minimal instruction count and cache-friendly access patterns.
-- **Code Documentation**: Comprehensive commenting for maintainability.
+// n - Number of bits (power of 2 in the dividend: 2^n
 
 ## 📈 Performance Characteristics
 
@@ -123,9 +106,6 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## 👨‍💻 Author
 
 **Wiktor Gerałtowski** - Computer Science Student, University of Warsaw
-
-- Specialization: Numerical algorithms and systems programming
-- Interests: Discrete mathematics, performance optimization, computer architecture
 
 ## 🏷️ Tags
 
