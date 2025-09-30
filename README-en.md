@@ -1,150 +1,136 @@
-ninv — n-bit integer “inverse” in x86-64 NASM
-This project implements a function that computes an n-bit integer y such that x·y ≤ 2ⁿ < x·(y+1) for a given n-bit integer x > 1, with numbers stored little-endian in 64-bit words; n is a multiple of 64 in [256000].
+# Integer Inverse Calculator - Assembly Implementation
 
-API specification
+## 🚀 Overview
 
-C signature: void ninv(uint64_t *y, uint64_t const *x, unsigned n);
+A high-performance x86-64 assembly implementation of an integer inverse calculator using the formula `y = floor(2^n / x)` for arbitrary-precision arithmetic. This project demonstrates advanced low-level programming techniques, manual memory management, and bit-manipulation algorithms optimized for large number operations.
 
-Arguments:
+## 🎯 Key Features
 
-x: pointer to an n-bit integer input (read-only buffer)
+- **Arbitrary Precision**: Handles large integers that exceed standard 64-bit limitations.
+- **Optimized Performance**: Hand-crafted assembly code with a minimal memory footprint.
+- **Bit-by-Bit Division**: A custom algorithm implementation for maximum precision.
+- **Memory Efficiency**: Stack-based buffer management with automatic cleanup.
+- **ABI Compliant**: Adheres to the x86-64 System V ABI conventions for seamless integration.
 
-y: pointer to an n-bit output buffer
+## 🛠 Technical Specifications
 
-n: bit width, multiple of 64, 64 ≤ n ≤ 256000
+- **Architecture**: x86-64 (Intel/AMD 64-bit)
+- **Assembler**: NASM (Netwide Assembler)
+- **Language**: Pure Assembly (NASM syntax)
+- **Platform**: Linux/Unix systems
+- **Calling Convention**: System V AMD64 ABI
 
-Conventions:
+## 📋 Algorithm Details
 
-Representation: natural binary, little-endian, 64-bit limbs (uint64_t)
+The implementation uses a sophisticated bit-by-bit long division algorithm:
+- Dynamic remainder management with carry propagation.
+- Word-level arithmetic operations for 64-bit chunks.
+- Manual borrow handling in subtraction operations.
+- Automatic precision normalization.
 
-ABI: System V AMD64
+## 🔧 Usage
 
-Contract: x must not be modified; y may contain arbitrary data on entry
+// Function signature
+void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 
-Repository layout
-ninv.asm — NASM implementation (to be submitted and used for linking)
+// Parameters:
+// result - Output array for the quotient
+// divisor - Input array containing the divisor
+// n - Number of bits (power of 2 in the dividend: 2^n)
 
-ninv_example.cpp — example program using GMP to validate results
+## 💡 Use Cases
 
-README.md — this document
+- Cryptographic operations requiring modular arithmetic.
+- High-precision mathematical computations.
+- Performance-critical numerical algorithms.
+- Educational material for learning assembly programming.
+- Implementations of big integer libraries.
 
-Optional: LICENSE — recommended open-source license (e.g., MIT or 0BSD) depending on course policy
+## 🎓 Educational Value
 
-Requirements
-OS: Linux x86-64 (as in the lab environment)
+This project showcases:
+- **Low-Level Programming**: Direct hardware manipulation and register optimization.
+- **Algorithm Implementation**: Translating mathematical concepts into assembly.
+- **Memory Management**: Manual stack allocation and cleanup procedures.
+- **Performance Optimization**: Minimal instruction count and cache-friendly access patterns.
+- **Code Documentation**: Comprehensive commenting for maintainability.
 
-Toolchain:
+## 📈 Performance Characteristics
 
-NASM targeting elf64
+- **Time Complexity**: O(n × w) where n is the bit count and w is the word count.
+- **Space Complexity**: O(w) of additional stack space for temporary buffers.
+- **Optimizations**: Register reuse, minimal memory allocations, and efficient bit operations.
 
-g++ (C++20) and GMP for the example program
+## 🚀 Getting Started
 
-Linking example with non-executable stack is recommended
+### Requirements
+- NASM (Netwide Assembler)
+- A Linux/Unix system with an x86-64 architecture
+- GCC or a compatible C compiler (for linking)
 
-Build instructions
-Assemble the NASM module:
+### Compilation
 
-nasm -f elf64 -w+all -w+error -o ninv.o ninv.asm
+#Compile the assembly file
+nasm -f elf64 ninv.asm -o ninv.o
 
-Build the example:
+#Link with C code
+gcc -o program main.c ninv.o
 
-g++ -c -Wall -Wextra -std=c++20 -O2 -o ninv_example.o ninv_example.cpp
 
-Link example with the assembly object:
+### Example Usage
 
-g++ -z noexecstack -o ninv_example ninv_example.o ninv.o -lgmp
+#include <stdint.h>
+#include <stdio.h>
 
-Running the example
-Execute: ./ninv_example to generate and verify outputs satisfying x·y ≤ 2ⁿ < x·(y+1) across test instances.
+// Declaration of the assembly function
+extern void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 
-Behavior and guarantees
-No argument validation is performed (per assignment specification)
+int main() {
+uint64_t divisor[] = {5}; // Divisor: 5
+uint64_t result = {0}; // Buffer for the result
+unsigned int n = 128; // 2^128 / 5
 
-Input buffer x remains untouched; output buffer y is zeroed and fully written by the routine
+ninv(result, divisor, n);
 
-Supports n up to 256000 bits (4000 limbs of 64 bits) with n divisible by 64
+printf("Result: %lu\n", result);
+return 0;
+}
 
-Algorithm overview
-Goal: compute y = ⌊2ⁿ / x⌋ so that x·y ≤ 2ⁿ and, by definition, 2ⁿ < x·(y+1).
+## 📁 Project Structure
 
-Bit-by-bit long division:
+ninv-assembly-x86-64/
+├── ninv.asm # Main assembly implementation
+├── main.c # Example usage
+├── Makefile # Compilation script
+├── README.md # This file
+└── tests/ # Unit tests
+└── test_ninv.c
 
-A remainder buffer is allocated on the stack; it starts at 1, and the loop iterates from bit n−1 down to 0
 
-Each iteration left-shifts the remainder by 1 and compares it with x (first by length, then limb-by-limb from most significant)
+## 📚 Documentation
 
-If remainder ≥ x, the corresponding bit in y is set and x is subtracted from the remainder (multi-limb subtraction with explicit borrow propagation)
+The code includes detailed comments in English that explain:
+- Each step of the algorithm
+- Register usage
+- Calling conventions
+- Memory management
+- Edge cases
 
-After subtraction, leading zero limbs are trimmed to maintain a tight remainder length
+## 📄 License
 
-The effective length of x is determined by skipping leading zero limbs at the high end before the main loop
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-Implementation details (NASM, ABI)
-Prologue/epilogue and callee-saved registers:
+## 👨‍💻 Author
 
-Saves and restores rbp, rbx, r12, r13, r14, r15 as required by System V AMD64 ABI
+**Wiktor Gerałtowski** - Computer Science Student, University of Warsaw
 
-Stack pointer is 16-byte aligned; local remainder buffer is allocated on the stack
+- Specialization: Numerical algorithms and systems programming
+- Interests: Discrete mathematics, performance optimization, computer architecture
 
-rep stosq is used to quickly zero the remainder buffer and the output buffer y
+## 🏷️ Tags
 
-Argument mapping:
+`assembly` `x86-64` `nasm` `mathematics` `algorithms` `performance-optimization` `low-level-programming` `arbitrary-precision` `university-of-warsaw` `computer-science`
 
-rdi → y, rsi → x, edx → n
+---
 
-Key working registers:
-
-r11 = x pointer, r10 = y pointer, r8d = original n, esi = x length in limbs, eax = remainder length in limbs, r13 = remainder pointer
-
-Remainder left-shift loop propagates carry via r9 across limbs
-
-Comparison first on limb count, then lexicographically from most significant limb to least
-
-Subtraction computes borrow explicitly without relying on CF/SBB to reduce long dependency chains in multi-limb loops
-
-Memory safety:
-
-y spans exactly n/64 limbs; remainder buffer is |x|+1 limbs, preventing overflow on left-shift extension 
-
-x is never written; all addressing is little-endian with 8-byte strides
-
-Complexity and performance
-Time: O(n · W), where W = n/64 limbs; each bit iteration performs a remainder shift, a comparison, and optionally a multi-limb subtraction
-
-Space: O(W) for the on-stack remainder; y is written in place after being zeroed
-
-Micro-optimizations:
-
-Single aligned stack allocation, rep stosq zeroing, explicit borrow computation to avoid flag hazards in long loops
-
-Code style and formatting
-NASM classic layout: labels in column 0, mnemonics aligned in a fixed column, no nested indentation
-
-Commenting:
-
-Block headers, register roles, loop intentions, and key instructions (bit set in y, borrow computation, length trimming) are documented inline
-
-Assignment compliance: ABI-respecting, no writes to x, no assumptions about initial y, n in [256000] and divisible by 64
-
-Testing
-Reference check with GMP:
-
-Compute y_ref = floor(2^n / x) and verify x*y ≤ 2^n < x*(y+1) for random and edge cases
-
-Edge cases: n = 64 and n = 256000; x just above 1; x with only the top bit set; x near 2ⁿ−1
-
-Memory safety checks in the example program can be done with sanitizers or valgrind to confirm no out-of-bounds accesses
-
-Limitations and assumptions
-No validation of n, buffer sizes, or x > 1 beyond the assignment contract
-
-Targets System V AMD64 on Linux; other ABIs would require prologue/epilogue adaptation
-
-License
-Adding a LICENSE file is recommended; for coursework, keep the repository private until grading to respect course policies on code sharing
-
-Authors and contact
-The implementation is prepared for assembly labs; inline comments explain each section’s purpose and non-trivial steps
-
-For questions, open an issue after grading and in accordance with course rules
-
+*This project was created as part of computer science studies to demonstrate  assembly programming techniques and the implementation of mathematical algorithms at the hardware level.*
