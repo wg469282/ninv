@@ -38,23 +38,6 @@ void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 // divisor - Tablica wejściowa zawierająca dzielnik
 // n - Liczba bitów (potęga 2 w dzielnej: 2^n)
 
-## 💡 Przypadki Użycia
-
-- Operacje kryptograficzne wymagające arytmetyki modularnej
-- Obliczenia matematyczne wysokiej precyzji
-- Algorytmy numeryczne krytyczne pod względem wydajności
-- Materiał edukacyjny do nauki programowania w assembly
-- Implementacje bibliotek dużych liczb całkowitych
-
-## 🎓 Wartość Edukacyjna
-
-Ten projekt prezentuje:
-- **Programowanie Niskiego Poziomu**: Bezpośrednia manipulacja sprzętem i optymalizacja rejestrów
-- **Implementacja Algorytmów**: Tłumaczenie koncepcji matematycznych na assembly
-- **Zarządzanie Pamięcią**: Ręczna alokacja i procedury czyszczenia stosu
-- **Optymalizacja Wydajności**: Minimalna liczba instrukcji i dostęp przyjazny cache'owi
-- **Dokumentacja Kodu**: Kompleksowe komentowanie dla łatwości utrzymania
-
 ## 📈 Charakterystyki Wydajnościowe
 
 - **Złożoność Czasowa**: O(n × w) gdzie n to liczba bitów, a w to liczba słów
@@ -119,9 +102,6 @@ Ten projekt jest udostępniony na licencji MIT. Zobacz plik `LICENSE` dla szczeg
 ## 👨‍💻 Autor
 
 **Wiktor Gerałtowski** - Student Informatyki, Uniwersytet Warszawski
-
-- Specjalizacja: Algorytmy numeryczne i programowanie systemowe
-- Zainteresowania: Matematyka dyskretna, optymalizacja wydajności, architektura komputerów
 
 ## 🏷️ Tagi
 
