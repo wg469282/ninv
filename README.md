@@ -29,7 +29,7 @@ Implementacja wykorzystuje zaawansowany algorytm długiego dzielenia bit po bici
 - Automatyczna normalizacja precyzji
 
 ## 🔧 Użycie
-
+```c
 // Sygnatura funkcji
 void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 
@@ -37,7 +37,7 @@ void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 // result - Tablica wyjściowa dla ilorazu
 // divisor - Tablica wejściowa zawierająca dzielnik
 // n - Liczba bitów (potęga 2 w dzielnej: 2^n)
-
+```
 ## 📈 Charakterystyki Wydajnościowe
 
 - **Złożoność Czasowa**: O(n × w) gdzie n to liczba bitów, a w to liczba słów
@@ -55,8 +55,10 @@ void ninv(uint64_t *result, uint64_t *divisor, unsigned int n);
 nasm -f elf64 ninv.asm -o ninv.o
 
 Linkowanie z kodem C
+```bash
 gcc -o program main.c ninv.o
-
+```
+```c
 ### Przykład Użycia
 
 #include <stdint.h>
@@ -75,7 +77,7 @@ ninv(result, divisor, n);
 printf("Wynik: %lu\n", result);
 return 0;
 }
-
+```
 ## 📁 Struktura Projektu
 ```
 ninv-assembly-x86-64/
