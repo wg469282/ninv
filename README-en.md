@@ -107,9 +107,6 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 **Wiktor Gerałtowski** - Computer Science Student, University of Warsaw
 
-## 🏷️ Tags
-
-`assembly` `x86-64` `nasm` `mathematics` `algorithms` `performance-optimization` `low-level-programming` `arbitrary-precision` `university-of-warsaw` `computer-science`
 
 ---
 
