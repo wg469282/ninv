@@ -105,9 +105,6 @@ Ten projekt jest udostępniony na licencji MIT. Zobacz plik `LICENSE` dla szczeg
 
 **Wiktor Gerałtowski** - Student Informatyki, Uniwersytet Warszawski
 
-## 🏷️ Tagi
-
-`assembly` `x86-64` `nasm` `matematyka` `algorytmy` `optymalizacja-wydajności` `programowanie-niskiego-poziomu` `arytmetyka-precyzyjna` `uniwersytet-warszawski` `informatyka`
 
 ---
 
